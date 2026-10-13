@@ -6,73 +6,62 @@ from streamlit_option_menu import option_menu
 # ==========================================
 
 st.set_page_config(
-    page_title="Meu Financeiro",
-    page_icon="💸",
-    layout="wide"
+    page_title="❤️ Dois Corações",
+    page_icon="❤️",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ==========================================
-# CSS PREMIUM
+# CSS
 # ==========================================
 
 st.markdown("""
 <style>
 
-#MainMenu {visibility:hidden;}
-footer {visibility:hidden;}
-header {visibility:hidden;}
-
-.stApp {
-    background-color: #0B1020;
+footer {
+    visibility:hidden;
 }
 
-/* Sidebar */
+.stApp{
+    background-color:#0B1020;
+}
+
 [data-testid="stSidebar"]{
-    background: linear-gradient(180deg,#111827,#0F172A);
+    background:linear-gradient(180deg,#111827,#0F172A);
 }
 
-/* Títulos */
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6{
     color:white !important;
 }
 
-/* Texto */
-p,label,span,div {
+p,label,span,div{
     color:#E5E7EB !important;
 }
 
-/* KPIs */
 [data-testid="metric-container"]{
     background:#111827;
     border:1px solid #1F2937;
     border-radius:18px;
     padding:20px;
-    box-shadow:0 0 20px rgba(0,0,0,0.30);
 }
 
-/* Inputs */
 .stTextInput input,
 .stNumberInput input,
 .stDateInput input,
-textarea {
+textarea{
     background:#1F2937 !important;
     color:white !important;
     border-radius:10px !important;
 }
 
-/* Botões */
 .stButton button{
-    background:linear-gradient(90deg,#2563EB,#3B82F6);
+    background:linear-gradient(90deg,#DC2626,#EF4444);
     color:white;
     border:none;
     border-radius:10px;
     font-weight:bold;
     height:48px;
-}
-
-/* Separador */
-hr{
-    border-color:#334155;
 }
 
 </style>
@@ -87,15 +76,12 @@ if "logado" not in st.session_state:
 
 if not st.session_state.logado:
 
-    c1,c2,c3 = st.columns([1,2,1])
+    c1, c2, c3 = st.columns([1,2,1])
 
     with c2:
 
-        st.markdown("<br><br>", unsafe_allow_html=True)
-
-        st.title("💸 Meu Financeiro")
-
-        st.caption("Painel Financeiro Executivo")
+        st.title("❤️ Dois Corações")
+        st.caption("Gestão Inteligente da Marmitaria")
 
         usuario = st.text_input("Usuário")
         senha = st.text_input("Senha", type="password")
@@ -108,8 +94,15 @@ if not st.session_state.logado:
                 st.rerun()
 
             else:
-
                 st.error("Usuário ou senha inválidos")
+
+        st.markdown("---")
+
+        if st.button("🔐 Esqueci minha senha"):
+
+            st.info(
+                "Informe seu e-mail na próxima versão para recuperação de senha."
+            )
 
 # ==========================================
 # SISTEMA
@@ -119,204 +112,202 @@ else:
 
     with st.sidebar:
 
-        st.markdown("## 💸 Meu Financeiro")
+        st.markdown("## ❤️ Dois Corações")
+        st.caption("Marmitaria")
 
         pagina = option_menu(
             menu_title=None,
             options=[
                 "Dashboard",
-                "Receitas",
-                "Despesas",
-                "Cartões",
-                "Contas",
+                "Pedidos",
+                "Financeiro",
                 "Relatórios",
                 "Configurações"
             ],
             icons=[
                 "house",
+                "basket",
                 "cash-stack",
-                "wallet2",
-                "credit-card",
-                "bank",
                 "bar-chart",
                 "gear"
             ],
             default_index=0,
             styles={
-                "container": {
+                "container":{
                     "background-color":"#111827"
                 },
-                "icon": {
-                    "color":"#60A5FA"
+                "icon":{
+                    "color":"#F87171"
                 },
-                "nav-link": {
+                "nav-link":{
                     "font-size":"15px",
-                    "border-radius":"10px",
-                    "color":"white"
+                    "border-radius":"10px"
                 },
-                "nav-link-selected": {
-                    "background-color":"#2563EB"
+                "nav-link-selected":{
+                    "background-color":"#DC2626"
                 }
             }
         )
 
-    # ======================================
+    # =====================================
     # DASHBOARD
-    # ======================================
+    # =====================================
 
     if pagina == "Dashboard":
 
-        st.title("Dashboard Executivo")
+        st.title("❤️ Dashboard")
 
         c1,c2,c3,c4 = st.columns(4)
 
         with c1:
             st.metric(
-                "Saldo Atual",
-                "R$ 15.200",
-                "+12%"
+                "🍱 Marmitas Hoje",
+                "58"
             )
 
         with c2:
             st.metric(
-                "Receitas",
-                "R$ 20.500",
-                "+8%"
+                "💵 Faturamento",
+                "R$ 1.850"
             )
 
         with c3:
             st.metric(
-                "Despesas",
-                "R$ 5.300",
-                "-2%"
+                "💸 Despesas",
+                "R$ 620"
             )
 
         with c4:
             st.metric(
-                "Resultado",
-                "R$ 15.200"
+                "📈 Lucro",
+                "R$ 1.230"
             )
 
         st.divider()
 
-        st.subheader("Evolução Financeira")
+        st.subheader("📊 Vendas da Semana")
 
-        grafico = {
-            "Jan":5000,
-            "Fev":6500,
-            "Mar":8200,
-            "Abr":9800,
-            "Mai":12100,
-            "Jun":15200
-        }
-
-        st.line_chart(grafico)
+        st.bar_chart({
+            "Seg":18,
+            "Ter":22,
+            "Qua":20,
+            "Qui":25,
+            "Sex":30,
+            "Sab":15
+        })
 
         st.divider()
 
-        st.subheader("Últimos Lançamentos")
+        st.subheader("📈 Evolução do Faturamento")
 
-        st.dataframe(
-            [
-                {
-                    "Data":"09/10/2026",
-                    "Tipo":"Receita",
-                    "Descrição":"Salário",
-                    "Valor":"R$ 8.500"
-                },
-                {
-                    "Data":"08/10/2026",
-                    "Tipo":"Despesa",
-                    "Descrição":"Mercado",
-                    "Valor":"R$ 350"
-                }
-            ],
-            use_container_width=True
+        st.line_chart({
+            "Jan":15000,
+            "Fev":18000,
+            "Mar":21000,
+            "Abr":25000,
+            "Mai":27000,
+            "Jun":31000
+        })
+
+    # =====================================
+    # PEDIDOS
+    # =====================================
+
+    elif pagina == "Pedidos":
+
+        st.title("🍱 Pedidos")
+
+        cliente = st.text_input("Cliente")
+
+        telefone = st.text_input("Telefone")
+
+        quantidade = st.number_input(
+            "Quantidade",
+            min_value=1
         )
 
-    elif pagina == "Receitas":
-
-        st.title("💰 Receitas")
-
-        st.date_input("Data")
-
-        st.text_input("Descrição")
-
-        st.selectbox(
-            "Categoria",
+        produto = st.selectbox(
+            "Produto",
             [
-                "Salário",
-                "Freelance",
-                "Comissão",
-                "Outros"
+                "Marmita Pequena",
+                "Marmita Média",
+                "Marmita Grande"
             ]
         )
 
-        st.number_input(
+        valor = st.number_input(
             "Valor",
             min_value=0.0
         )
 
-        st.button("Salvar Receita")
-
-    elif pagina == "Despesas":
-
-        st.title("💸 Despesas")
-
-        st.date_input("Data")
-
-        st.text_input("Descrição")
-
-        st.selectbox(
-            "Categoria",
+        status = st.selectbox(
+            "Status",
             [
-                "Moradia",
-                "Mercado",
-                "Lazer",
-                "Combustível",
-                "Outros"
+                "Recebido",
+                "Produzindo",
+                "Entregue",
+                "Cancelado"
             ]
         )
 
-        st.number_input(
+        st.button("Salvar Pedido")
+
+    # =====================================
+    # FINANCEIRO
+    # =====================================
+
+    elif pagina == "Financeiro":
+
+        st.title("💰 Financeiro")
+
+        tipo = st.selectbox(
+            "Tipo",
+            [
+                "Receita",
+                "Despesa"
+            ]
+        )
+
+        data = st.date_input("Data")
+
+        descricao = st.text_input("Descrição")
+
+        valor = st.number_input(
             "Valor",
             min_value=0.0
         )
 
-        st.text_area("Observação")
+        observacao = st.text_area(
+            "Observação"
+        )
 
-        st.button("Salvar Despesa")
+        st.button("Salvar")
 
-    elif pagina == "Cartões":
-
-        st.title("💳 Cartões")
-
-        st.text_input("Nome do Cartão")
-        st.number_input("Limite", min_value=0.0)
-        st.button("Salvar Cartão")
-
-    elif pagina == "Contas":
-
-        st.title("🏦 Contas")
-
-        st.text_input("Nome da Conta")
-        st.number_input("Saldo Inicial", min_value=0.0)
-        st.button("Salvar Conta")
+    # =====================================
+    # RELATÓRIOS
+    # =====================================
 
     elif pagina == "Relatórios":
 
         st.title("📈 Relatórios")
-        st.info("Módulo em construção")
+
+        st.info(
+            "Em breve: faturamento, despesas e lucro detalhados."
+        )
+
+    # =====================================
+    # CONFIGURAÇÕES
+    # =====================================
 
     elif pagina == "Configurações":
 
         st.title("⚙️ Configurações")
 
-        st.text_input("Novo Usuário")
+        st.text_input("E-mail de recuperação")
 
         st.text_input(
             "Nova Senha",
             type="password"
         )
 
-        st.button("Salvar")
+        st.button("Salvar Configurações")
